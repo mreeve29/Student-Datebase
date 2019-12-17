@@ -8,6 +8,11 @@ public class GraduateStudent extends Student{
 		major = m;
 	}
 	
+	public GraduateStudent() {
+		super("",-1);
+		major = "";
+	}
+	
 	public void setMajor(String m) {
 		major = m;
 	}
@@ -21,5 +26,12 @@ public class GraduateStudent extends Student{
 					"Major: " + major + '\n' + 
 					"Student ID: " + getID();
 	}
+	
+	public boolean equals(GraduateStudent g) {
+		if(major.equals(g.getMajor())) {
+			return true;
+		}else return false;
+	}
+	
 	
 }

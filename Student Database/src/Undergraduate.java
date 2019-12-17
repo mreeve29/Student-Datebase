@@ -1,7 +1,7 @@
 
 public class Undergraduate extends Student{
 	
-	enum Grade{
+	public enum Grade{
 		FRESHMAN("Freshman"),
 		SOPHMORE("Sophmore"),
 		JUNIOR("Junior"),
@@ -30,6 +30,12 @@ public class Undergraduate extends Student{
 		major = m;
 	}
 	
+	public Undergraduate() {
+		super("",-1);
+		level = null;
+		major = "";
+	}
+	
 	public String print() {
 		return "Name: "  + getName() + '\n' +
 					"Grade Level: " + level.getDescription() + '\n' +
@@ -37,5 +43,18 @@ public class Undergraduate extends Student{
 					"Student ID: " + getID();
 	}
 	
+	public Grade getLevel() {
+		return level;
+	}
+	
+	public String getMajor(){
+		return major;
+	}
+	
+	public boolean equals(Undergraduate u) {
+		if(level == u.getLevel() && major.equals(u.getMajor())) {
+			return true;
+		}else return false;
+	}
 	
 }
