@@ -25,6 +25,7 @@ public class Database {
 		int id = 0;
 		boolean exists = false;
 		do {
+			exists = false;
 			Random rand = new Random();
 			String num = "";
 			for(int i = 1; i <= 4; i++) {
