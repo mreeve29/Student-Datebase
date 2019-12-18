@@ -22,7 +22,7 @@ public class Student extends Person{
 	
 	public String print() {
 		return "Name: " + getName() + '\n'+
-					"Student ID: " + studentID + '\n';
+				"Student ID: " + studentID;
 	}
 	
 	

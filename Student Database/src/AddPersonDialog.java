@@ -54,15 +54,9 @@ public class AddPersonDialog extends GBDialog {
 			
 			if(undergradButton.isSelected()) {
 				//undergrad
-				if(comboLevel.getSelectedItem().equals("Freshmen")) {
-					db.addPerson(new Undergraduate(name, 0, Undergraduate.Grade.FRESHMAN, major));
-				}else if(comboLevel.getSelectedItem().equals("Sophmore")) {
-					db.addPerson(new Undergraduate(name, 0, Undergraduate.Grade.SOPHMORE, major));
-				}else if(comboLevel.getSelectedItem().equals("Junior")) {
-					db.addPerson(new Undergraduate(name, 0, Undergraduate.Grade.JUNIOR, major));
-				}else if(comboLevel.getSelectedItem().equals("Senior")) {
-					db.addPerson(new Undergraduate(name, 0, Undergraduate.Grade.SENIOR, major));
-				}
+				Undergraduate.Grade level = Undergraduate.Grade.valueOf(comboLevel.getSelectedItem().toString().toUpperCase());
+				db.addPerson(new Undergraduate(name, idField.getNumber(), level, major));
+				
 			}else if(graduateButton.isSelected()){
 				//grad
 				db.addPerson(new GraduateStudent(name, 0, major));
@@ -77,7 +71,7 @@ public class AddPersonDialog extends GBDialog {
 			}
 			
 			setDlgCloseIndicator("ADDED");
-			
+			dispose();
 		}
 	}
 	
@@ -144,7 +138,7 @@ public class AddPersonDialog extends GBDialog {
 		studentTypeBG.add(personButton);
 		studentTypeBG.add(studentButton);
 		comboLevel.addItem("Freshmen");
-		comboLevel.addItem("Sophmore");
+		comboLevel.addItem("Sopohmore");
 		comboLevel.addItem("Junior");
 		comboLevel.addItem("Senior");
 		comboLevel.setSelectedIndex(0);

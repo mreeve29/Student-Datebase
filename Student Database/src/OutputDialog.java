@@ -37,7 +37,7 @@ public class OutputDialog extends GBDialog{
 	private void fillTextArea(ArrayList<Person> list) {
 		String people = "";
 		for(Person p : list) {
-			people += p.print() + '\n';
+			people += p.print() + "\n\n";
 		}
 		personArea.setText(people);
 		personArea.setFont(new Font("SansSerif", Font.PLAIN, 14));

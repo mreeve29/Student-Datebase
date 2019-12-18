@@ -13,22 +13,14 @@ public class DatabaseGUI extends GBFrame{
 	private JButton compareStudentButton = addButton("Compare Students",7,1,1,1);
 	private JButton quitButton = addButton("Quit",8,1,1,1);
 	
-	public static void main(String[] args) {
-		DatabaseGUI frm = new DatabaseGUI();
-	}
-	
-	public DatabaseGUI() {
-		this.setSize(400,400);
-		this.setTitle("Student Database");
-		this.setVisible(true);
-	}
-	
-	
 	public void buttonClicked(JButton button) {
 		if(button == addPersonButton) {
 			AddPersonDialog apd = new AddPersonDialog(this,db);
 			if(apd.getDlgCloseIndicator().equals("ADDED")) {
 				personCountLabel.setText("Number of people in database: " + db.getSize());
+				if(db.getSize() >= 10) {
+					addPersonButton.setEnabled(false);
+				}
 			}
 		}else if(button == printAllPeopleButton) {
 			OutputDialog od = new OutputDialog(this, db.getPeople(), "All People:", "All People in Database");
@@ -48,5 +40,15 @@ public class DatabaseGUI extends GBFrame{
 			System.exit(1);
 		}
 	}
-
+	
+	
+	public static void main(String[] args) {
+		DatabaseGUI frm = new DatabaseGUI();
+	}
+	
+	public DatabaseGUI() {
+		this.setSize(400,400);
+		this.setTitle("Student Database");
+		this.setVisible(true);
+	}
 }

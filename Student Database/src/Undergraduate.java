@@ -3,7 +3,7 @@ public class Undergraduate extends Student{
 	
 	public enum Grade{
 		FRESHMAN("Freshman"),
-		SOPHMORE("Sophmore"),
+		SOPOHMORE("Sopohmore"),
 		JUNIOR("Junior"),
 		SENIOR("Senior");
 		
