@@ -1,18 +1,17 @@
 import BreezySwing.*;
 
 import java.awt.Font;
-import java.util.ArrayList;
 
 import javax.swing.*;
 @SuppressWarnings("serial")
 public class PersonCompareDialog extends GBDialog{
 
 	//class objects
-	private ArrayList<Person> people;
+	private Database db;
 	
 	private JLabel label = addLabel("",1,1,1,1);
-	private JList<String> bookList = addList(2,1,1,1);
-	private JTextArea bookDetails = addTextArea("",2,2,1,1);
+	private JList<String> peopleList = addList(2,1,1,1);
+	private JTextArea peopleDetails = addTextArea("",2,2,1,1);
 	
 	private JButton closeButton = addButton("Close",3,2,1,1);
 	
@@ -24,13 +23,13 @@ public class PersonCompareDialog extends GBDialog{
 	}
 	
 	//constructor
-	public PersonCompareDialog(JFrame parent, ArrayList<Person> list, String dialogTitle, String labelText) {
+	public PersonCompareDialog(JFrame parent, Database d, String dialogTitle, String labelText) {
 		super(parent);
 		
-		people = list;
+		db = d;
 		
-		bookDetails.setEditable(false);
-		bookDetails.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		peopleDetails.setEditable(false);
+		peopleDetails.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		
 		label.setText(labelText);
 		
@@ -41,28 +40,50 @@ public class PersonCompareDialog extends GBDialog{
 		this.setVisible(true);
 	}
 
-	//adds books to list
+	//adds people to list
 	private void populateList() {
-		if(people.size() == 0)return;
-		for(Person p : people) {
+		if(db.getUndergradsAndGrads().size() == 0)return;
+		for(Person p : db.getUndergradsAndGrads()) {
 			addItemToList(p.getName());
 		}
 	}
 
 	//helper method to add single String to list
 	private void addItemToList(String add) {
-		DefaultListModel<String> model = (DefaultListModel<String>)bookList.getModel();
+		DefaultListModel<String> model = (DefaultListModel<String>)peopleList.getModel();
         model.addElement(add);
 	}
 	
 	//list event listeners
 	public void listItemSelected(JList<String> list) {
-		//compare
-		revalidate();
+		compare();
 	}
 	
 	public void listDoubleClicked(JList<String> list, String itemClicked) {
-		//compare
+		compare();
+	}
+	
+	private void compare() {
+		Person selected = db.getUndergradsAndGrads().get(peopleList.getSelectedIndex());
+		String result = "";
+		for(Person p : db.getPeople()) {
+			if(p instanceof GraduateStudent) {
+				GraduateStudent inList = (GraduateStudent)p;
+				GraduateStudent s = (GraduateStudent)selected;
+				if(inList == selected)continue;
+				if(s.equals(inList)) {
+					result += inList.print();
+				}
+			}else {
+				Undergraduate inList = (Undergraduate)p;
+				Undergraduate s = (Undergraduate)selected;
+				if(inList == selected)continue;
+				if(s.equals(inList)) {
+					result += inList.print();
+				}
+			}
+		}
+		peopleDetails.setText(result);
 		revalidate();
 	}
 

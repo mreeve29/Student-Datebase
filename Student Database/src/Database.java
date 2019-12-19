@@ -73,6 +73,16 @@ public class Database {
 		return graduates;
 	}
 	
+	public ArrayList<Person> getUndergradsAndGrads(){
+		ArrayList<Person> combined = new ArrayList<Person>();
+		for(Person p : people) {
+			if(p instanceof GraduateStudent || p instanceof Undergraduate) {
+				combined.add(p);
+			}
+		}
+		return combined;
+	}
+	
 	
 	public int getSize() {
 		return people.size();

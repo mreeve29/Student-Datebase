@@ -35,7 +35,7 @@ public class DatabaseGUI extends GBFrame{
 			OutputDialog od = new OutputDialog(this, db.getGraduates(), "All Graduates:", "All Graduates in Database");
 			
 		}else if(button == compareStudentButton) {
-			//PersonCompareDialog pcd = new PersonComareDialog();
+			PersonCompareDialog pcd = new PersonCompareDialog(this,db,"Select Students to Compare:","Compare Students");
 		}else if(button == quitButton) {
 			System.exit(1);
 		}
