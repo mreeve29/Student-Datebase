@@ -59,7 +59,7 @@ public class AddPersonDialog extends GBDialog {
 				
 			}else if(graduateButton.isSelected()){
 				//grad
-				db.addPerson(new GraduateStudent(name, 0, major));
+				db.addPerson(new GraduateStudent(name, idField.getNumber(), major));
 			}else if(personButton.isSelected()){
 				//person
 				System.out.println("add person");
@@ -89,7 +89,7 @@ public class AddPersonDialog extends GBDialog {
 		public void stateChanged(ChangeEvent e) {
 			JRadioButton source = (JRadioButton) e.getSource();
 			
-			if(source.getText().equals("Undergraduate") && undergradButton.isSelected()) {
+			if(source == undergradButton && undergradButton.isSelected()) {
 				//undergrad --> show level field
 				idField.setVisible(true);
 				idLabel.setVisible(true);
@@ -98,7 +98,7 @@ public class AddPersonDialog extends GBDialog {
 				comboLevel.setVisible(true);
 				levelLabel.setVisible(true);
 				addPersonButton.setText("Add Undergraduate Student");
-			}else if(source.getText().equals("Graduate") && graduateButton.isSelected()){
+			}else if(source == graduateButton && graduateButton.isSelected()){
 				//grad --> hide level field
 				idField.setVisible(true);
 				idLabel.setVisible(true);
@@ -107,7 +107,7 @@ public class AddPersonDialog extends GBDialog {
 				comboLevel.setVisible(false);
 				levelLabel.setVisible(false);
 				addPersonButton.setText("Add Graduate Student");
-			}else if(source.getText().equals("Student") && studentButton.isSelected()) {
+			}else if(source == studentButton && studentButton.isSelected()) {
 				//student --> hide level and major fields
 				idField.setVisible(true);
 				idLabel.setVisible(true);
@@ -116,7 +116,7 @@ public class AddPersonDialog extends GBDialog {
 				comboLevel.setVisible(false);
 				levelLabel.setVisible(false);
 				addPersonButton.setText("Add Student");
-			}else if(source.getText().equals("Person") && personButton.isSelected()) {
+			}else if(source == personButton && personButton.isSelected()) {
 				//person --> hide everything but name
 				idField.setVisible(false);
 				idLabel.setVisible(false);

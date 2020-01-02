@@ -88,5 +88,9 @@ public class Database {
 		return people.size();
 	}
 	
+	public void importData(ArrayList<Person> p) {
+		people.clear();
+		people.addAll(p);
+	}
 	
 }
