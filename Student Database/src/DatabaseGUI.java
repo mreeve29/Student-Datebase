@@ -66,16 +66,21 @@ public class DatabaseGUI extends GBFrame{
 			if(!fm.importFile(db, selected)) {
 				messageBox("Invald file, please select a .ser file");
 			}
+			
+			personCountLabel.setText("Number of people in database: " + db.getSize());
+			if(db.getSize() >= 10) {
+				addPersonButton.setEnabled(false);
+			}
+			
 		}else if(button == exportButton){
 			FileManager fm = new FileManager();
 			String home = System.getProperty("user.home");
 			JFileChooser fc = new JFileChooser(home + "/Desktop");
 
-			fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-			fc.showSaveDialog(this);
+			int clicked = fc.showSaveDialog(this);
 			
 			File selected = fc.getSelectedFile();
-			if(selected == null)return;
+			if(selected == null || clicked == JFileChooser.CANCEL_OPTION)return;
 			
 			if(fm.output(db, selected)) {
 				messageBox("File Saved");
@@ -85,7 +90,6 @@ public class DatabaseGUI extends GBFrame{
 			System.exit(1);
 		}
 	}
-	
 	
 	public static void main(String[] args) {
 		DatabaseGUI frm = new DatabaseGUI();
