@@ -72,14 +72,14 @@ public class PersonCompareDialog extends GBDialog{
 				GraduateStudent s = (GraduateStudent)selected;
 				if(inList == selected)continue;
 				if(s.equals(inList)) {
-					result += inList.print();
+					result += inList.print() + "\n\n";
 				}
 			}else {
 				Undergraduate inList = (Undergraduate)p;
 				Undergraduate s = (Undergraduate)selected;
 				if(inList == selected)continue;
 				if(s.equals(inList)) {
-					result += inList.print();
+					result += inList.print() + "\n\n";
 				}
 			}
 		}

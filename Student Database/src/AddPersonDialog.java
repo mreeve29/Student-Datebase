@@ -27,6 +27,7 @@ public class AddPersonDialog extends GBDialog {
 	private JComboBox<String> comboLevel = addComboBox(6,3,2,1);
 	
 	private JButton addPersonButton = addButton("Add Undergraduate",7,3,2,1);
+	private JButton cancelButton = addButton("Cancel",7,1,1,1);
 	
 	private Database db;
 	
@@ -71,6 +72,8 @@ public class AddPersonDialog extends GBDialog {
 			}
 			
 			setDlgCloseIndicator("ADDED");
+			dispose();
+		}else if(button == cancelButton) {
 			dispose();
 		}
 	}
