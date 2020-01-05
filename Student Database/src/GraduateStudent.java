@@ -1,16 +1,13 @@
 
 public class GraduateStudent extends Student{
 	
+	//class objects
 	private String major;
 	
+	//constructor
 	public GraduateStudent(String nm, int id, String m) {
 		super(nm,id);
 		major = m;
-	}
-	
-	public GraduateStudent() {
-		super("",-1);
-		major = "";
 	}
 	
 	public void setMajor(String m) {
@@ -28,7 +25,7 @@ public class GraduateStudent extends Student{
 	}
 	
 	public boolean equals(GraduateStudent g) {
-		if(major.equals(g.getMajor())) {
+		if(major.equalsIgnoreCase(g.getMajor())) {
 			return true;
 		}else return false;
 	}

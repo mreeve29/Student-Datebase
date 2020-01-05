@@ -1,8 +1,11 @@
 import java.io.Serializable;
 
 public class Person implements Serializable{
+	
+	//class objects
 	private String name;
 	
+	//constructor
 	public Person(String nm) {
 		name = nm;
 	}

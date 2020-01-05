@@ -1,39 +1,35 @@
 
 public class Undergraduate extends Student{
 	
+	//enum to store grade level
 	public enum Grade{
 		FRESHMEN("Freshmen"),
 		SOPOHMORE("Sopohmore"),
 		JUNIOR("Junior"),
 		SENIOR("Senior");
 		
+		//enum objects
 		private String description;
 		
 		public String getDescription() {
 			return description;
 		}
 		
+		//enum constructor
 		Grade(String d){
 			description = d;
-		}
-		
-		
+		}	
 	}
 	
 	private Grade level;
 	
 	private String major;
 	
+	//constructor
 	public Undergraduate(String nm, int id, Grade lvl, String m) {
 		super(nm,id);
 		level = lvl;
 		major = m;
-	}
-	
-	public Undergraduate() {
-		super("",-1);
-		level = null;
-		major = "";
 	}
 	
 	public String print() {
@@ -52,7 +48,7 @@ public class Undergraduate extends Student{
 	}
 	
 	public boolean equals(Undergraduate u) {
-		if(level == u.getLevel() && major.equals(u.getMajor())) {
+		if(level == u.getLevel() && major.equalsIgnoreCase(u.getMajor())) {
 			return true;
 		}else return false;
 	}

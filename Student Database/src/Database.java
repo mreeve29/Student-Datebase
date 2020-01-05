@@ -2,9 +2,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Database {
-	private ArrayList<Person> people = new ArrayList<Person>();
-	private ArrayList<Integer> studentIDs = new ArrayList<Integer>();
 	
+	//class objects
+	private ArrayList<Person> people = new ArrayList<Person>();
+	
+	//adds a person
 	public void addPerson(Person p) {
 		if(p instanceof Student){
 			Student s = (Student) p;
@@ -17,10 +19,12 @@ public class Database {
 		}
 	}
 	
+	//gets a person
 	public Person getPerson(int index) {
 		return people.get(index);
 	}
 	
+	//generates unique id between 1111 and 9999
 	private int generateID() {
 		int id = 0;
 		boolean exists = false;
@@ -32,17 +36,17 @@ public class Database {
 				num += rand.nextInt(9)+1;
 			}
 			id = Integer.parseInt(num);
-			for(Integer i : studentIDs) {
-				if(i == id)exists = true;
-			}
+			exists = idExists(id);
 		}while(exists);
 		return id;
 	}
 	
+	//gets all people
 	public ArrayList<Person> getPeople(){
 		return people;
 	}
 	
+	//gets all students
 	public ArrayList<Person> getStudents(){
 		ArrayList<Person> students = new ArrayList<Person>();
 		for(Person p : people) {
@@ -53,6 +57,7 @@ public class Database {
 		return students;
 	}
 	
+	//gets all undergrads
 	public ArrayList<Person> getUndergrads(){
 		ArrayList<Person> undergrads = new ArrayList<Person>();
 		for(Person p : people) {
@@ -63,6 +68,7 @@ public class Database {
 		return undergrads;
 	}
 	
+	//gets all grads
 	public ArrayList<Person> getGraduates(){
 		ArrayList<Person> graduates = new ArrayList<Person>();
 		for(Person p : people) {
@@ -73,6 +79,7 @@ public class Database {
 		return graduates;
 	}
 	
+	//gets undergrads and grads, used in comparison dialog
 	public ArrayList<Person> getUndergradsAndGrads(){
 		ArrayList<Person> combined = new ArrayList<Person>();
 		for(Person p : people) {
@@ -83,14 +90,26 @@ public class Database {
 		return combined;
 	}
 	
-	
+	//gets amount of people
 	public int getSize() {
 		return people.size();
 	}
 	
+	//imports new arraylist
 	public void importData(ArrayList<Person> p) {
 		people.clear();
 		people.addAll(p);
+	}
+	
+	//checks if ID already exists
+	public boolean idExists(int id) {
+		for(Person p : people) {
+			if(p instanceof Student) {
+				Student s = (Student)p;
+				if(s.getID() == id)return true;
+			}
+		}
+		return false;
 	}
 	
 }

@@ -36,7 +36,7 @@ public class PersonCompareDialog extends GBDialog{
 		populateList();
 		
 		this.setTitle(dialogTitle);
-		this.setSize(400,400);
+		this.setSize(600,400);
 		this.setVisible(true);
 	}
 
@@ -69,21 +69,29 @@ public class PersonCompareDialog extends GBDialog{
 		for(Person p : db.getPeople()) {
 			if(p instanceof GraduateStudent) {
 				GraduateStudent inList = (GraduateStudent)p;
-				GraduateStudent s = (GraduateStudent)selected;
-				if(inList == selected)continue;
-				if(s.equals(inList)) {
-					result += inList.print() + "\n\n";
+				if(selected instanceof GraduateStudent) {
+					GraduateStudent s = (GraduateStudent)selected;
+					if(inList == selected)continue;
+					if(s.equals(inList)) {
+						result += inList.print() + "\n\n";
+					}
 				}
 			}else {
 				Undergraduate inList = (Undergraduate)p;
-				Undergraduate s = (Undergraduate)selected;
-				if(inList == selected)continue;
-				if(s.equals(inList)) {
-					result += inList.print() + "\n\n";
+				if(selected instanceof Undergraduate) {
+					Undergraduate s = (Undergraduate)selected;
+					if(inList == selected)continue;
+					if(s.equals(inList)) {
+						result += inList.print() + "\n\n";
+					}
 				}
 			}
 		}
-		peopleDetails.setText(result);
+		if(result.isEmpty()) {
+			peopleDetails.setText("There are no students who compare to " + selected.getName());
+		}else {
+			peopleDetails.setText("Students that compare to " + selected.getName() + ":\n" + result);
+		}
 		revalidate();
 	}
 

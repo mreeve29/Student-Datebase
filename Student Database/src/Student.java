@@ -1,15 +1,13 @@
 
 public class Student extends Person{
 
+	//class variables
 	private int studentID;
 	
+	//constructor
 	public Student(String nm, int id) {
 		super(nm);
 		studentID = id;
-	}
-	
-	public Student() {
-		super("");
 	}
 	
 	public void setID(int id) {

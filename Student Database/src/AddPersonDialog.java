@@ -6,6 +6,7 @@ import BreezySwing.*;
 
 public class AddPersonDialog extends GBDialog {
 
+	//elements
 	private JLabel addLabel = addLabel("Add Person:",1,1,4,1);
 	
 	private ButtonGroup studentTypeBG = new ButtonGroup();
@@ -29,17 +30,20 @@ public class AddPersonDialog extends GBDialog {
 	private JButton addPersonButton = addButton("Add Undergraduate",7,3,2,1);
 	private JButton cancelButton = addButton("Cancel",7,1,1,1);
 	
+	//class objects
 	private Database db;
 	
 	public void buttonClicked(JButton button) {
 		if(button == addPersonButton) {
 			
+			//check if name is blank
 			String name = nameField.getText();
 			if(name.isEmpty() || isBlank(name)) {
 				messageBox("Empty name");
 				return;
 			}
 			
+			//check if major is blank
 			String major = majorField.getText();
 			if(undergradButton.isSelected() || graduateButton.isSelected()) {	
 				if(major.isEmpty() || isBlank(major)) {
@@ -48,27 +52,38 @@ public class AddPersonDialog extends GBDialog {
 				}
 			}
 			
-			if(idField.getNumber() < 0) {
+			//check id
+			if(!idField.isValidNumber()) {
+				messageBox("Invalid ID");
+				return;
+			}
+			
+			int id = idField.getNumber();
+			
+			if(id < 0) {
 				messageBox("Can't have negative ID");
+				return;
+			}
+			
+			if(db.idExists(id)) {
+				messageBox("ID " + id + " already exists");
 				return;
 			}
 			
 			if(undergradButton.isSelected()) {
 				//undergrad
 				Undergraduate.Grade level = Undergraduate.Grade.valueOf(comboLevel.getSelectedItem().toString().toUpperCase());
-				db.addPerson(new Undergraduate(name, idField.getNumber(), level, major));
+				db.addPerson(new Undergraduate(name, id, level, major));
 				
 			}else if(graduateButton.isSelected()){
 				//grad
-				db.addPerson(new GraduateStudent(name, idField.getNumber(), major));
+				db.addPerson(new GraduateStudent(name, id, major));
 			}else if(personButton.isSelected()){
 				//person
-				System.out.println("add person");
 				db.addPerson(new Person(name));
 			}else if(studentButton.isSelected()) {
 				//student
-				System.out.println("add student");
-				db.addPerson(new Student(name,idField.getNumber()));
+				db.addPerson(new Student(name,id));
 			}
 			
 			setDlgCloseIndicator("ADDED");
@@ -86,6 +101,7 @@ public class AddPersonDialog extends GBDialog {
 		return true;
 	}
 	
+	//event listener that changes what fields are visible depending on the type of person selected
 	private ChangeListener cl = new ChangeListener() {
 		
 		@Override
@@ -133,7 +149,7 @@ public class AddPersonDialog extends GBDialog {
 		}
 	};
 	
-	
+	//constructor
 	public AddPersonDialog(JFrame parent, Database d) {
 		super(parent);
 		studentTypeBG.add(graduateButton);
